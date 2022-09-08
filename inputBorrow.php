@@ -93,8 +93,8 @@ if ($conn->connect_error) {
         <form class="needs-validation" novalidate method="post" action="addBorrow.php">
           <div class="row g-3">
             <div class="col-12">
-              <label for="title" class="form-label">Judul buku</label>
-                <select name="title" id="title">
+              <label for="book_id" class="form-label">Judul buku</label>
+                <select name="book_id" id="book_id">
                     <?php
                     $sql = "SELECT * FROM book";
                     $result = $conn->query($sql);
@@ -107,8 +107,8 @@ if ($conn->connect_error) {
             </div>
 
             <div class="col-12">
-              <label for="member" class="form-label">Judul buku</label>
-                <select name="member" id="member">
+              <label for="member_id" class="form-label">Judul buku</label>
+                <select name="member_id" id="member_id">
                     <?php
                     $sql = "SELECT * FROM member";
                     $result = $conn->query($sql);
