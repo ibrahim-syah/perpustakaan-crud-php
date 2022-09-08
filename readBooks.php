@@ -71,6 +71,7 @@
     <div class="py-5 text-center">
       <h2>Data Buku</h2>
       <p class="lead">Halaman ini memuat seluruh buku yang ada di database</p>
+      <a href="inputBook.php" class="btn btn-primary my-2">Tambah Buku</a>
     </div>
 
     <div class="row g-5">
