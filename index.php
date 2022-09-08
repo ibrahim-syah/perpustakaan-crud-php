@@ -76,7 +76,7 @@
                 <p>
                     <a href="readBooks.php" class="btn btn-primary my-2">Buku</a>
                     <a href="readMembers.php" class="btn btn-primary my-2">Member</a>
-                    <a href="readPinjaman.php" class="btn btn-primary my-2">Pinjaman Buku</a>
+                    <a href="readBorrow.php" class="btn btn-primary my-2">Pinjaman Buku</a>
                 </p>
             </div>
         </div>

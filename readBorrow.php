@@ -1,17 +1,3 @@
-<?php
-$servername = "localhost";
-$username = "ibrahim";
-$password = "12345678";
-$dbname = "library_db";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -83,45 +69,61 @@ if ($conn->connect_error) {
 <div class="container">
   <main>
     <div class="py-5 text-center">
-      <h2>Pinjam buku</h2>
-      <p class="lead">Silakan isi data buku dan peminjam yang akan dimasukkan ke database.</p>
+      <h2>Data peminjaman buku</h2>
+      <p class="lead">Halaman ini memuat seluruh buku yang ada dipinjam</p>
+      <a href="inputBorrow.php" class="btn btn-primary my-2">Pinjam buku</a>
     </div>
 
     <div class="row g-5">
+      <!-- <div class="col-md-5 col-lg-4 order-md-last"></div> -->
       <div class="col-md-12 col-lg-12">
-        <h4 class="mb-3">Data Peminjaman</h4>
-        <form class="needs-validation" novalidate method="post" action="addBorrow.php">
-          <div class="row g-3">
-            <div class="col-12">
-              <label for="book_id" class="form-label">Buku</label>
-                <select name="book_id" id="book_id">
-                    <?php
-                    $sql = "SELECT * FROM book";
-                    $result = $conn->query($sql);
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Judul buku</th>
+                    <th scope="col">Peminjam</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $servername = "localhost";
+                $username = "ibrahim";
+                $password = "12345678";
+                $dbname = "library_db";
 
-                    while ($row = $result->fetch_assoc()) {
-                        echo "<option value=".$row['book_id'].">".$row['title']."</option>";
+                // Create connection
+                $conn = new mysqli($servername, $username, $password, $dbname);
+                // Check connection
+                if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                }
+
+                $sql = "SELECT borrow.borrow_id, book.title, member.first_name, borrow.status FROM borrow
+                INNER JOIN book ON borrow.book_id=book.book_id
+                INNER JOIN member ON borrow.member_id=member.member_id";
+                $result = $conn->query($sql);
+
+                if ($result->num_rows > 0) {
+                    // output data of each row
+                    while($row = $result->fetch_assoc()) {
+                        echo "<tr>";
+                        echo "<td>".$row['title']."</td>";
+                        echo "<td>".$row['first_name']."</td>";
+                        echo "<td>".$row['status']."</td>";
+                        echo "<td>"."<a type='button' class='btn btn-primary' href='updateBorrow.php?borrow_id=".$row['borrow_id']."'>Update</button>"."</td";
+                        echo "<td>"."<a type='button' class='btn btn-danger' href='deleteBorrow.php?borrow_id=".$row['borrow_id']."'>Hapus</button>"."</td";
+                        echo "</tr>";
                     }
-                    ?>
-                </select>
-            </div>
+                } else {
+                    echo "0 results";
+                }
 
-            <div class="col-12">
-              <label for="member_id" class="form-label">Peminjam</label>
-                <select name="member_id" id="member_id">
-                    <?php
-                    $sql = "SELECT * FROM member";
-                    $result = $conn->query($sql);
-
-                    while ($row = $result->fetch_assoc()) {
-                        echo "<option value=".$row['member_id'].">".$row['first_name']."</option>";
-                    }
-                    ?>
-                </select>
-            </div>
-
-          <button class="w-100 btn btn-primary btn-lg" type="submit">Pinjam buku</button>
-        </form>
+                $conn->close();
+                ?>
+            </tbody>
+        </table>
       </div>
     </div>
   </main>
