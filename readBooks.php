@@ -104,6 +104,10 @@
                             while ($row = $result->fetch_assoc()) {
                                 echo "<tr>";
                                 echo "<td>". $row['title']. "</td>";
+                                echo "<td>". $row['author']. "</td>";
+                                echo "<td>". $row['published_date']. "</td>";
+                                echo "<td>". "<a type='button' class='btn btn-primary' href='updateBook.php?book_id=".$row['book_id']."'>Update</a>"."</td>";
+                                echo "<td>". "<a type='button' class='btn btn-danger' href='deleteBook.php?book_id=".$row['book_id']."'>Delete</a>"."</td>";
                                 echo "</tr>";
                             }
                         } else {
