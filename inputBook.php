@@ -78,7 +78,7 @@
                         <div class="row g-3">
                             <div class="col-12">
                                 <label for="title" class="form-label">Judul</label>
-                                <input type="text" name="title" id="title" placeholder="Judul" value="" required class="form-control">
+                                <input type="text" name="title" id="title" placeholder="Judul" value=""  class="form-control" required>
                                 <div class="invalid-feedback">
                                     Masukkan judul buku yang valid.
                                 </div>
@@ -110,5 +110,7 @@
             </div>
         </main>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js"></script>
+      <script src="form-validation.js"></script>
   </body>
 </html>
