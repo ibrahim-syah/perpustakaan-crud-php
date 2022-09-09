@@ -72,6 +72,50 @@
             <p class="lead">Halaman ini memuat seluruh buku yang ada di database</p>
             <a href="inputBook.php" class="btn btn-primary my-2">Tambah Buku</a>
         </div>
+
+        <div class="row g-5">
+            <div class="col-md-12 col-lg-12">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Judul</th>
+                            <th scope="col">Penulis</th>
+                            <th scope="col">Tanggal terbit</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $servername = "localhost";
+                        $username = "guest";
+                        $password = "12345678";
+                        $dbname = "library_db";
+
+                        $conn = new mysqli($servername, $username, $password, $dbname);
+
+                        if ($conn->connect_error) {
+                            die("Connection failed: ". $conn->connect_erro);
+                        }
+
+                        $sql = "SELECT book_id, title, author, published_date FROM book";
+                        $result = $conn->query($sql);
+
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                echo "<tr>";
+                                echo "<td>". $row['title']. "</td>";
+                                echo "</tr>";
+                            }
+                        } else {
+                            echo "0 result";
+                        }
+
+                        $conn->close();
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
      </main> 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js"></script>
