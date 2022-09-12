@@ -4,16 +4,23 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tambah Member</title>
+    <title>Edit member</title>
 </head>
 <body>
     
 <?php
 // define variables and set to empty values
-$first_nameErr = $last_nameErr = $emailErr = "";
-$first_name = $last_name = $emailErr = "";
+$first_nameErr = $last_nameErr = $emailErr = $member_id = "";
+$first_name = $last_name = $emailErr = $member_idErr = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+  
+    if (empty($_POST['member_id'])) {
+        $member_idErr = "ID member gagal diterima";
+    } else {
+        $member_id = test_input($_POST['member_id']);
+    }
 
   if (empty($_POST["first_name"])) {
     $first_nameErr = "Nama depan harus diisi!";
@@ -68,18 +75,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "INSERT INTO member (first_name, last_name, email)
-    VALUES ('".$first_name."', '".$last_name."', '".$email."')";
+    $sql = "UPDATE member SET
+    first_name = '".$first_name."',
+    last_name = '".$last_name."',
+    email = '".$email."'
+    WHERE member_id = ".$member_id;
 
     if ($conn->query($sql) === TRUE) {
-    echo "New record created successfully";
+    echo "New record updated successfully";
     } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
     }
 
     $conn->close();
 
-    echo "<h2>Data member berhasil diinput:</h2>";
+    echo "<h2>Data member berhasil diupdate:</h2>";
     echo $first_name;
     echo "<br>";
     echo $last_name;
