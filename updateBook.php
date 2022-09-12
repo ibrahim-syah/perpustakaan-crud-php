@@ -108,6 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                     <form action="editBook.php" class="needs-validation" novalidate method="post">
                         <div class="row g-3">
                             <div class="col-12">
+                                <input type="text" name="book_id" value="<?php echo $_GET['book_id']; ?>" hidden>
                                 <label for="title" class="form-label">Judul</label>
                                 <input type="text" name="title" id="title" placeholder="Judul" value="<?php echo $title ?>"  class="form-control" required>
                                 <div class="invalid-feedback">
