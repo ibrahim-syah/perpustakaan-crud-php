@@ -61,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "<br>";
     } else {
     $servername = "localhost";
-    $username = "ibrahim";
+    $username = "guest";
     $password = "12345678";
     $dbname = "library_db";
 

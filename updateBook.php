@@ -3,7 +3,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $title = $author = $published_date = "";
 
     $servername = "localhost";
-    $username = "ibrahim";
+    $username = "guest";
     $password = "12345678";
     $dbname = "library_db";
 
